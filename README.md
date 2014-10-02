@@ -27,13 +27,13 @@ Example:
 	</channel>
 </rss>
 ```
-
+```Objective-C
 XMLNode *rootNode = [XMLParser.parser parseData:fileContents];
 XMLNode *channelNode = rootNode[@"channel"];
 NSString *channelTitle = channelNode[@"title.#stringValue"];
 NSURL *channelURL = channelNode[@"link.#URLValue"];
 NSArray *items = channelNode[@"item[].#itemValue"];
-
+```
 To transform <item> into Item you need to implement a method in XMLNode category
 ```Objective-C
 @implementation XMLNode (ItemValue)
