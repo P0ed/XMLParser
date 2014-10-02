@@ -6,8 +6,20 @@
 //  Copyright (c) 2014 Konstantin Sukharev. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "XMLParser.h"
+
+
+@interface Item : NSObject
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSURL *link;
+@property (nonatomic) NSString *text;
+@end
+
+
+@interface XMLNode (ItemValue)
+@end
+
 
 int main(int argc, const char * argv[]) {
 
@@ -20,15 +32,35 @@ int main(int argc, const char * argv[]) {
 		
 		NSString *channelTitle = rootNode[@"channel.title.#stringValue"];
 		NSURL *channelURL = rootNode[@"channel.link.#URLValue"];
-		NSArray *itemsTitles = rootNode[@"channel.item[].title.#stringValue"];
+		NSArray *items = rootNode[@"channel.item[].#itemValue"];
 		
 		NSLog(@"Channel: %@", channelTitle);
 		NSLog(@"Link: %@", channelURL);
 		
-		[itemsTitles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
+		[items enumerateObjectsUsingBlock:^(Item *item, NSUInteger idx, BOOL *stop) {
 			
-			NSLog(@"\t%@", title);
+			NSLog(@"\t%@", item.title);
 		}];
 	}
     return 0;
 }
+
+
+@implementation Item
+@end
+
+
+@implementation XMLNode (ItemValue)
+
+- (Item *)itemValue {
+	
+	Item *item = [Item new];
+	item.title = self[@"title.#stringValue"];
+	item.link = self[@"title.#URLValue"];
+	item.text = self[@"title.#stringValue"];
+	
+	return item;
+}
+
+@end
+
