@@ -5,7 +5,7 @@ Simple parser that builds a tree and provides easy access to the nodes,
 allowing to transform nodes into objects implementing a single method.
 
 Example:
-```
+```XML
 <rss>
 	<channel>
 		<title>
