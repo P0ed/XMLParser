@@ -5,8 +5,8 @@ Simple parser that builds a tree and provides easy access to the nodes,
 allowing to transform nodes into objects implementing a single method.
 
 Example:
-
-<rss version="2.0">
+```
+<rss>
 	<channel>
 		<title>
 			W3Schools Home Page
@@ -26,6 +26,7 @@ Example:
 		</item>
 	</channel>
 </rss>
+```
 
 XMLNode *rootNode = [XMLParser.parser parseData:fileContents];
 XMLNode *channelNode = rootNode[@"channel"];
@@ -34,7 +35,7 @@ NSURL *channelURL = channelNode[@"link.#URLValue"];
 NSArray *items = channelNode[@"item[].#itemValue"];
 
 To transform <item> into Item you need to implement a method in XMLNode category
-
+```Objective-C
 @implementation XMLNode (ItemValue)
 - (Item *)itemValue {
 	
@@ -46,3 +47,4 @@ To transform <item> into Item you need to implement a method in XMLNode category
 	return item;
 }
 @end
+```
