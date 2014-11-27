@@ -2,7 +2,7 @@ XMLParser
 =========
 
 Simple parser that builds a tree and provides easy access to the nodes,
-allowing to transform nodes into objects implementing a single method.
+allowing to transform them into objects implementing a single method.
 
 Example:
 ```XML
@@ -41,8 +41,8 @@ To transform <item> into Item you need to implement a method in XMLNode category
 	
 	Item *item = [Item new];
 	item.title = self[@"title.#stringValue"];
-	item.link = self[@"title.#URLValue"];
-	item.text = self[@"title.#stringValue"];
+	item.link = self[@"link.#URLValue"];
+	item.text = self[@"description.#stringValue"];
 	
 	return item;
 }
